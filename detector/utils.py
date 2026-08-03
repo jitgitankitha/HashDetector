@@ -1,10 +1,3 @@
-"""
-utils.py
-========
-Small, stateless helper functions used by rules.py and detector.py.
-Nothing in here should know about HashMatch / scoring — pure string/byte
-level utilities only, so they're trivially unit-testable.
-"""
 
 import base64
 import binascii
