@@ -1,27 +1,3 @@
-"""
-confidence.py
-=============
-Turns raw candidate HashMatch objects (from rules.py) into a ranked,
-deduplicated result list. This is where ambiguity between same-length
-hashes (e.g. MD5 vs NTLM, both 32 hex chars) gets resolved as best as
-a static ruleset can.
-
-Scoring approach
-----------------
-final_score = base_score
-              * tier_multiplier
-              + context_bonus
-              - length_ambiguity_penalty
-
-- tier_multiplier: PREFIX matches are trusted far more than LENGTH_CHARSET
-  guesses, so they get a large multiplier.
-- context_bonus: optional user-supplied hints (e.g. "windows", "unix",
-  "database") boost algorithms known to occur in that context.
-- length_ambiguity_penalty: the more candidates share the same length
-  bucket, the less any single one can be trusted -> spread confidence
-  out rather than letting every candidate claim near-100%.
-"""
-
 from .models import HashMatch, Tier
 
 TIER_MULTIPLIER = {
