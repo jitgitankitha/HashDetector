@@ -1,19 +1,8 @@
-"""
-models.py
-=========
-Typed data structures shared across the detector package.
-
-Using dataclasses keeps rules.py / confidence.py / formatter.py decoupled:
-each module only needs to know the shape of HashMatch, not each other's
-internals.
-"""
-
 from dataclasses import dataclass, field
 from enum import Enum
 
 
 class Tier(str, Enum):
-    """How the match was derived — informs how much we trust it."""
     PREFIX = "prefix"          # unambiguous marker (e.g. $2b$, eyJ...)
     LENGTH_CHARSET = "length_charset"  # ambiguous, length+charset only
     STRUCTURAL = "structural"  # delimiter/encoding-based inference
@@ -21,7 +10,6 @@ class Tier(str, Enum):
 
 @dataclass(frozen=True)
 class HashRule:
-    """A single detection rule (mostly mirrors constants.py entries)."""
     name: str
     category: str
     notes: str
@@ -31,7 +19,6 @@ class HashRule:
 
 @dataclass
 class HashMatch:
-    """A candidate hash-type identification result for a given input."""
     name: str
     category: str
     notes: str
@@ -45,7 +32,6 @@ class HashMatch:
 
 @dataclass
 class DetectionResult:
-    """Full result for one input string."""
     input_value: str
     length: int
     matches: list[HashMatch]
