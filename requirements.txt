@@ -1,0 +1,5 @@
+# Core detector has zero third-party runtime dependencies —
+# everything uses the Python standard library (re, base64, json, argparse).
+
+# Dev / testing only:
+pytest>=7.4

@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools>=68.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "hashdetector"
+version = "0.1.0"
+description = "Academic hash-type identification tool: infers likely hash/digest algorithm from a given string using prefix signatures, length/charset heuristics, and confidence scoring."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [
+    { name = "Your Name" }
+]
+keywords = ["hash", "identification", "security", "forensics", "education"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Education",
+    "Topic :: Security",
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+]
+
+[project.scripts]
+hashdetector = "cli:main"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.setuptools.packages.find]
+include = ["detector*"]
