@@ -1,9 +1,4 @@
-"""
-hashdetector.detector
-======================
-Academic hash-type identification package.
-
-Public API:
+'''Public API:
     identify(value, context=None) -> DetectionResult
     identify_compound(value, context=None) -> list[DetectionResult]
 """
