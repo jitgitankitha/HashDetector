@@ -1,14 +1,3 @@
-"""
-rules.py
-========
-Turns the static data in constants.py into actual candidate matches for
-a given input string. This module only produces *raw* candidates with a
-base score — final ranking/adjustment happens in confidence.py.
-
-Two passes:
-  1. match_prefix_rules   -> Tier.PREFIX   (unambiguous marker-based)
-  2. match_length_rules   -> Tier.LENGTH_CHARSET (ambiguous, needs scoring)
-"""
 
 from .constants import PREFIX_RULES, HEX_LENGTH_TABLE, BASE64_LENGTH_TABLE
 from .models import HashMatch, Tier
