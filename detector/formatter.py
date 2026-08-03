@@ -1,18 +1,9 @@
-"""
-formatter.py
-============
-Turns DetectionResult objects into human-readable or machine-readable
-output. Kept separate from detector.py so the same detection logic can
-back a CLI, a web API, or a test harness without duplicating display code.
-"""
-
 import json
 
 from .models import DetectionResult
 
 
 def to_json(results: list[DetectionResult]) -> str:
-    """Serialize results to a JSON string (machine-readable output)."""
     payload = []
     for r in results:
         payload.append(
@@ -36,7 +27,6 @@ def to_json(results: list[DetectionResult]) -> str:
 
 
 def to_table(results: list[DetectionResult], top_n: int = 5) -> str:
-    """Render results as a plain-text table, suitable for terminal output."""
     lines = []
     for r in results:
         lines.append(f"Input: {r.input_value}")
@@ -58,7 +48,7 @@ def to_table(results: list[DetectionResult], top_n: int = 5) -> str:
 
 
 def to_plain_best(results: list[DetectionResult]) -> str:
-    """One line per input: just the best guess (for scripting / piping)."""
+    """One line per input: just the best guess ashte."""
     lines = []
     for r in results:
         if r.best_match:
