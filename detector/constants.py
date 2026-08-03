@@ -1,21 +1,4 @@
-"""
-constants.py
-============
-Static reference data used by the hash identifier:
-
-- Character sets (hex, base64, base64url, crypt-b64)
-- Length -> candidate-hash-type tables (Tier 2: ambiguous, same length/charset)
-- Prefix-based signatures (Tier 1: unambiguous, marker-identified formats)
-
-Keeping this data separate from the matching logic (rules.py) means new
-hash types can be added here without touching any control flow.
-"""
-
 import re
-
-# ---------------------------------------------------------------------------
-# Character sets
-# ---------------------------------------------------------------------------
 
 HEX_CHARSET = "0123456789abcdefABCDEF"
 BASE64_CHARSET = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/="
@@ -27,12 +10,6 @@ HEX_RE = re.compile(r"^[0-9a-fA-F]+$")
 BASE64_RE = re.compile(r"^[A-Za-z0-9+/]+={0,2}$")
 BASE64URL_RE = re.compile(r"^[A-Za-z0-9_-]+={0,2}$")
 
-
-# ---------------------------------------------------------------------------
-# Tier 1 — Prefix / marker identified formats (unambiguous)
-# ---------------------------------------------------------------------------
-# Each entry: name, compiled regex, category, notes, base confidence score.
-# These are checked first because a positive match here is highly reliable.
 
 PREFIX_RULES = [
     dict(
@@ -116,15 +93,6 @@ PREFIX_RULES = [
     ),
 ]
 
-
-# ---------------------------------------------------------------------------
-# Tier 2 — Length-based candidate table (hex-encoded digests)
-# ---------------------------------------------------------------------------
-# key: exact character length of the hex string
-# value: list of (name, category, prevalence_weight, notes)
-# prevalence_weight (0-100) feeds confidence.py to rank common algorithms
-# above rare ones when the raw pattern is otherwise identical.
-
 HEX_LENGTH_TABLE = {
     8: [
         ("CRC32", "checksum", 60, "8 hex chars / 32-bit checksum."),
@@ -171,7 +139,6 @@ HEX_LENGTH_TABLE = {
     ],
 }
 
-# Base64-encoded (not hex) digest lengths -> candidates, keyed by decoded byte length
 BASE64_LENGTH_TABLE = {
     20: [("SHA-1 (base64)", "digest", 60, "Base64-encoded 160-bit digest.")],
     32: [("SHA-256 (base64)", "digest", 70, "Base64-encoded 256-bit digest.")],
